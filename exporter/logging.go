@@ -3,8 +3,8 @@ package exporter
 import (
 	"context"
 
-	opencensus "github.com/devopsfaith/krakend-opencensus"
 	"github.com/luraproject/lura/logging"
+	opencensus "github.com/scriptdash/krakend-opencensus"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
 )

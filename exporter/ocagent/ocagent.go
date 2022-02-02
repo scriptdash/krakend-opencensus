@@ -6,7 +6,8 @@ import (
 	"time"
 
 	"contrib.go.opencensus.io/exporter/ocagent"
-	opencensus "github.com/devopsfaith/krakend-opencensus"
+	opencensus "github.com/scriptdash/krakend-opencensus"
+
 	// Auto-import to enable grpc compression
 	_ "google.golang.org/grpc/encoding/gzip"
 )

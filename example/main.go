@@ -16,13 +16,13 @@ import (
 	krakendgin "github.com/luraproject/lura/router/gin"
 	"github.com/luraproject/lura/transport/http/client"
 
-	opencensus "github.com/devopsfaith/krakend-opencensus"
-	"github.com/devopsfaith/krakend-opencensus/exporter"
-	_ "github.com/devopsfaith/krakend-opencensus/exporter/influxdb"
-	_ "github.com/devopsfaith/krakend-opencensus/exporter/jaeger"
-	_ "github.com/devopsfaith/krakend-opencensus/exporter/prometheus"
-	_ "github.com/devopsfaith/krakend-opencensus/exporter/zipkin"
-	opencensusgin "github.com/devopsfaith/krakend-opencensus/router/gin"
+	opencensus "github.com/scriptdash/krakend-opencensus"
+	"github.com/scriptdash/krakend-opencensus/exporter"
+	_ "github.com/scriptdash/krakend-opencensus/exporter/influxdb"
+	_ "github.com/scriptdash/krakend-opencensus/exporter/jaeger"
+	_ "github.com/scriptdash/krakend-opencensus/exporter/prometheus"
+	_ "github.com/scriptdash/krakend-opencensus/exporter/zipkin"
+	opencensusgin "github.com/scriptdash/krakend-opencensus/router/gin"
 )
 
 func main() {

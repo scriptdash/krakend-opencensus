@@ -56,9 +56,7 @@ func TestNew_post(t *testing.T) {
 		w := httptest.NewRecorder()
 		data := make([]byte, rand.Intn(1024))
 		req, err := http.NewRequest("POST", "/post", bytes.NewBuffer(data))
-		req.Header.Set("X-B3-SpanId", "48656c6c6f")
-		req.Header.Set("X-B3-TraceId", "5370616e")
-		req.Header.Set("X-B3-Sampled", "1")
+		req.Header.Set("traceparent", "00-33ace746ec2e79049e498a67f128a66d-64efe3e9c135b8b4-01")
 		if err != nil {
 			t.Error(err.Error())
 			return
@@ -153,15 +151,7 @@ func checkViews(t *testing.T, totalCount int, meanReqSize, meanRespSize float64)
 
 func httpHandlerWithPropagation(statusCode, respSize int) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.Request.Header.Get("X-B3-SpanId") == "" {
-			c.Status(999)
-			return
-		}
-		if c.Request.Header.Get("X-B3-TraceId") == "" {
-			c.Status(999)
-			return
-		}
-		if c.Request.Header.Get("X-B3-Sampled") == "" {
+		if c.Request.Header.Get("traceparent") == "" {
 			c.Status(999)
 			return
 		}
@@ -174,9 +164,7 @@ func httpHandlerWithPropagation(statusCode, respSize int) gin.HandlerFunc {
 func httpHandler(statusCode, respSize int) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Status(statusCode)
-		fmt.Println(c.Request.Header.Get("X-B3-SpanId"))
-		fmt.Println(c.Request.Header.Get("X-B3-TraceId"))
-		fmt.Println(c.Request.Header.Get("X-B3-Sampled"))
+		fmt.Println(c.Request.Header.Get("traceparent"))
 		body := make([]byte, respSize)
 		c.Writer.Write(body)
 	}

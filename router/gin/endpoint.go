@@ -9,7 +9,7 @@ import (
 	"github.com/luraproject/lura/proxy"
 	krakendgin "github.com/luraproject/lura/router/gin"
 	"go.opencensus.io/plugin/ochttp"
-	"go.opencensus.io/plugin/ochttp/propagation/b3"
+	"go.opencensus.io/plugin/ochttp/propagation/tracecontext"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
@@ -30,7 +30,7 @@ func HandlerFunc(cfg *config.EndpointConfig, next gin.HandlerFunc, prop propagat
 		return next
 	}
 	if prop == nil {
-		prop = &b3.HTTPFormat{}
+		prop = &tracecontext.HTTPFormat{}
 	}
 	pathExtractor := opencensus.GetAggregatedPathForMetrics(cfg)
 	h := &handler{

@@ -1,4 +1,3 @@
-
 // Copyright 2018, OpenCensus Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,22 +19,22 @@ package opencensus
 
 import (
 	"context"
+	"io"
 	"net/http"
 	"net/http/httptrace"
 	"strconv"
-	"io"
 	"sync"
 	"time"
 
 	"go.opencensus.io/plugin/ochttp"
-	"go.opencensus.io/trace"
-	"go.opencensus.io/trace/propagation"
-	"go.opencensus.io/plugin/ochttp/propagation/b3"
+	"go.opencensus.io/plugin/ochttp/propagation/tracecontext"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
+	"go.opencensus.io/trace"
+	"go.opencensus.io/trace/propagation"
 )
 
-var defaultFormat propagation.HTTPFormat = &b3.HTTPFormat{}
+var defaultFormat propagation.HTTPFormat = &tracecontext.HTTPFormat{}
 
 // Transport is an http.RoundTripper that instruments all outgoing requests with
 // OpenCensus stats and tracing.
@@ -52,7 +51,7 @@ type Transport struct {
 	Base http.RoundTripper
 
 	// Propagation defines how traces are propagated. If unspecified, a default
-	// (currently B3 format) will be used.
+	// (currently traceconext format) will be used.
 	Propagation propagation.HTTPFormat
 
 	// StartOptions are applied to the span started by this Transport around each
@@ -316,7 +315,6 @@ func isHealthEndpoint(path string) bool {
 	}
 	return false
 }
-
 
 // statsTransport is an http.RoundTripper that collects stats for the outgoing requests.
 type statsTransport struct {
